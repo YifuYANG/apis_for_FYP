@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>My_FYP</groupId>
+    <artifactId>Rest</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <modules>
+
+        <module>databank</module>
+        <module>scenario_1</module>
+    </modules>
+</project>
