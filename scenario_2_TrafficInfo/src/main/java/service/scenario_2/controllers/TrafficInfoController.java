@@ -15,7 +15,7 @@ public class TrafficInfoController {
     @Autowired
     TokenPool tokenPool;
     @RestrictUserAccess(requiredLevel = UserLevel.admin)
-    @RequestMapping(value="/traffic",method= RequestMethod.POST)
+    @RequestMapping(value="/e",method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Boolean> requiretraffic(@RequestHeader("token") String token){
         System.out.println(tokenPool.getUserIdByToken(token));
