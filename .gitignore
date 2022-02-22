@@ -1,3 +1,4 @@
 # Project exclude paths
 /databank/target/
 /scenario_1/target/
+.idea
