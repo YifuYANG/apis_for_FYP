@@ -30,14 +30,15 @@ public class LoginController {
     @ResponseBody
     public ResponseEntity<Map> login(@RequestBody Loginform loginform){
         User user = userRepository.findByUserbyusername(loginform.getUsername());
+        Map<String,String> map = new HashMap<>();
         if(loginform.getPassword().equals(user.getPassword())){
             String token=tokenPool.generateToken();
             tokenPool.login(user.getId(),token);
-            Map<String,String> map = new HashMap<>();
             map.put("token",token);
             return new ResponseEntity<>(map, HttpStatus.CREATED);
         } else {
-            return null;
+            map.put("fail","unknown username or password");
+            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
     }
 }

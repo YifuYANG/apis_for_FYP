@@ -18,7 +18,6 @@ public class TrafficInfoController {
     @RequestMapping(value="/e",method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Boolean> requiretraffic(@RequestHeader("token") String token){
-        System.out.println(tokenPool.getUserIdByToken(token));
         return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
     }
 }
