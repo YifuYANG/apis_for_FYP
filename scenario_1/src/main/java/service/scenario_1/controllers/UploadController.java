@@ -25,8 +25,6 @@ public class UploadController {
     @Autowired
     private UploadedDataRepository uploadedDataRepository;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     TokenPool tokenPool;
 
     @RestrictUserAccess(requiredLevel = UserLevel.admin)
@@ -47,20 +45,7 @@ public class UploadController {
     }
 
 
-    @RequestMapping(value="/authentication/pass",method= RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Map> login(@RequestBody Loginform loginform){
-        User user = userRepository.findByUserBytrustdvice(loginform.getDeviceid());
-        if(loginform.getPassword().equals(user.getPassword())){
-        String token=tokenPool.generateToken();
-        tokenPool.login(loginform.getDeviceid(),token);
-        Map<String,String> map = new HashMap<>();
-        map.put("token",token);
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
-        } else {
-            return null;
-        }
-    }
+
 
     //helper function which Calculate distance with two location which result in meters
     private double distanceCalculation(double CurrentLatitude,double CurrentLongitude,double targetLatitude,double targetLongitude){
