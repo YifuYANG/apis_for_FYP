@@ -8,4 +8,7 @@ import service.scenario_1.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.trustdvice = :trustdvice")
     User findByUserBytrustdvice(@Param("trustdvice") String trustdvice);
+
+    @Query("select u from User u where u.trustdvice = :trustdvice")
+    User findByid(@Param("trustdvice") String trustdvice);
 }

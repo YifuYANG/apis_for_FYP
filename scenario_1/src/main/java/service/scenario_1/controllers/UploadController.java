@@ -26,11 +26,13 @@ public class UploadController {
     private UploadedDataRepository uploadedDataRepository;
     @Autowired
     TokenPool tokenPool;
+    @Autowired
+    private UserRepository userRepository;
 
     @RestrictUserAccess(requiredLevel = UserLevel.admin)
     @RequestMapping(value="/uploaddata",method= RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> uploadData(@RequestHeader("token") String deviceid,@RequestBody UploadedData uploadedData){
+    public ResponseEntity<Boolean> uploadData(@RequestHeader("token") String token,@RequestBody UploadedData uploadedData){
         uploadedData.setDistance(distanceCalculation(uploadedData.getCurrentLatitude(),uploadedData.getCurrentLongitude(),uploadedData.getTargetLatitude(),uploadedData.getTargetLongitude()));
         uploadedDataRepository.save(uploadedData);
         return new ResponseEntity<>(true, HttpStatus.CREATED);
@@ -44,6 +46,15 @@ public class UploadController {
         return new ResponseEntity<>(inputform.getSpeed() > 0,HttpStatus.ACCEPTED);
     }
 
+    @RestrictUserAccess(requiredLevel = UserLevel.admin)
+    @RequestMapping(value="/license",method= RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String,String>> getdriverlicense(@RequestHeader("token") String token){
+        Map<String,String> map=new HashMap<>();
+        User user= userRepository.findByid(tokenPool.getUserIdByToken(token));
+        map.put("license",user.getDriverlicense());
+        return new ResponseEntity<>(map,HttpStatus.ACCEPTED);
+    }
 
 
 

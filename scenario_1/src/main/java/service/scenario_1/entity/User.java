@@ -16,6 +16,8 @@ public class User {
     @Column
     private String trustdvice;
     @Column
+    private String driverlicense;
+    @Column
     private String password;
     @Column
     UserLevel userLevel;

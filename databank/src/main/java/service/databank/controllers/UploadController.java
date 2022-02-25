@@ -27,7 +27,6 @@ public class UploadController {
     @RequestMapping(value="/finddriver",method= RequestMethod.POST)
     public ResponseEntity<Boolean> uploadData(@RequestBody Databankform databankform){
         List<UserInfo> userInfos =userinfoRepository.findByDriverLicense(databankform.getDriverlicense());
-        System.out.println(databankform.getDriverlicense());
         for(UserInfo info: userInfos){
             if(info.getCarplate().equals(databankform.getDeviceid())){
                 return new ResponseEntity<>(true, HttpStatus.FOUND);
