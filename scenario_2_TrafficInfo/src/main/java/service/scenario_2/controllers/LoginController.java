@@ -26,9 +26,10 @@ public class LoginController {
     @Autowired
     private TokenPool tokenPool;
 
-    @RequestMapping(value="/log",method= RequestMethod.POST)
+    @RequestMapping(value="/logUser",method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map> login(@RequestBody Loginform loginform){
+        System.out.println(loginform.getPassword());
         User user = userRepository.findByUserbyusername(loginform.getUsername());
         Map<String,String> map = new HashMap<>();
         if(loginform.getPassword().equals(user.getPassword())){
