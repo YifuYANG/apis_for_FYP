@@ -13,7 +13,7 @@ public class TrafficInfoController {
     @RequestMapping(value="/traffic",method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Boolean> requiretraffic(){
-        System.out.println("qiuqiule");
+        System.out.println("???????????????????");
         return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
     }
 }
