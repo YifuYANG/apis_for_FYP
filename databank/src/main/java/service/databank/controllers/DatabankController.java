@@ -15,7 +15,7 @@ import service.databank.vo.Databankform;
 import java.util.List;
 
 @RestController
-public class UploadController {
+public class DatabankController {
     @Autowired
     UserinfoRepository userinfoRepository;
     @RequestMapping(value="/uploaduserinfo",method= RequestMethod.POST)
@@ -26,6 +26,8 @@ public class UploadController {
 
     @RequestMapping(value="/finddriver",method= RequestMethod.POST)
     public ResponseEntity<Boolean> uploadData(@RequestBody Databankform databankform){
+        System.out.println(databankform.getDriverlicense());
+        System.out.println(databankform.getDeviceid());
         List<UserInfo> userInfos =userinfoRepository.findByDriverLicense(databankform.getDriverlicense());
         for(UserInfo info: userInfos){
             if(info.getCarplate().equals(databankform.getDeviceid())){

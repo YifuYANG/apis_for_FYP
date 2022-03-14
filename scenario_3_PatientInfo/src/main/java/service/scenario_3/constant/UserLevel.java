@@ -1,4 +1,4 @@
-package service.scenario_2.constant;
+package service.scenario_3.constant;
 
 public enum UserLevel {
     client,

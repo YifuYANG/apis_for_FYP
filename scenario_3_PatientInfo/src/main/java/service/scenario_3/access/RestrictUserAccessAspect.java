@@ -1,4 +1,4 @@
-package service.scenario_2.access;
+package service.scenario_3.access;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +8,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import service.scenario_2.bean.TokenPool;
-import service.scenario_2.constant.UserLevel;
-import service.scenario_2.entity.User;
-import service.scenario_2.repository.UserRepository;
+import service.scenario_3.bean.TokenPool;
+import service.scenario_3.constant.UserLevel;
+import service.scenario_3.entity.User;
+import service.scenario_3.repository.UserRepository;
+
 
 import java.lang.reflect.Method;
 
@@ -25,7 +26,7 @@ public class RestrictUserAccessAspect {
     @Autowired
     TokenPool tokenPool;
 
-    @Around("@annotation(service.scenario_2.access.RestrictUserAccess)")
+    @Around("@annotation(service.scenario_3.access.RestrictUserAccess)")
     public Object restrictUserAccess(ProceedingJoinPoint joinPoint) throws Throwable {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -33,8 +34,8 @@ public class RestrictUserAccessAspect {
         UserLevel userLevel = method.getAnnotation(RestrictUserAccess.class).requiredLevel();
         try {
             String token = (String) joinPoint.getArgs()[0];
-            int userid=tokenPool.getUserIdByToken(token);
-            User user=userRepository.findByUserbyuserid(userid);
+            String trustdvice=tokenPool.getUserIdByToken(token);
+            User user=userRepository.findByUserBytrustdvice(trustdvice);
             if(user==null){
                 throw new Exception("User doest login");
             } else if(user.getUserLevel() != userLevel){

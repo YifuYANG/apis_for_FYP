@@ -1,4 +1,4 @@
-package service.scenario_2.bean;
+package service.scenario_3.bean;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -12,27 +12,26 @@ import java.util.UUID;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class TokenPool {
 
-    //pool object maps <int userId -> String token>
-    private Map<Integer, String> pool = new HashMap<>();
+    private Map<String, String> pool = new HashMap<>();
 
     public String generateToken() {
         return UUID.randomUUID().toString();
     }
 
-    public int getUserIdByToken(String token) {
-        for (Map.Entry<Integer, String> entry : pool.entrySet()) {
+    public String getUserIdByToken(String token) {
+        for (Map.Entry<String, String> entry : pool.entrySet()) {
             if (entry.getValue().equals(token))
                 return entry.getKey();
         }
-        return -1;
+        return null;
     }
 
     public String getTokenByUserId(Long id) {
         return pool.get(id);
     }
 
-    public void login(int userid, String token) {
-        pool.put(userid, token);
+    public void login(String device, String token) {
+        pool.put(device, token);
     }
 
 

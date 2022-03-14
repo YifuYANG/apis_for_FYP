@@ -1,8 +1,8 @@
-package service.scenario_2.entity;
+package service.scenario_3.entity;
 
 
 import lombok.Data;
-import service.scenario_2.constant.UserLevel;
+import service.scenario_3.constant.UserLevel;
 
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String username;
+    private String trustdvice;
     @Column
     private String password;
     @Column

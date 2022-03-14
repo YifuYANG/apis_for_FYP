@@ -9,5 +9,6 @@
         <module>databank</module>
         <module>scenario_1</module>
         <module>scenario_2_TrafficInfo</module>
+        <module>scenario_3_PatientInfo</module>
     </modules>
 </project>

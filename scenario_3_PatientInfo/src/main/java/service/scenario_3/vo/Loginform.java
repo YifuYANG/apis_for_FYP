@@ -1,10 +1,10 @@
-package service.scenario_2.vo;
+package service.scenario_3.vo;
 
 
 import lombok.Data;
 
 @Data
 public class Loginform {
-    private String username;
+    private String deviceid;
     private String password;
 }
