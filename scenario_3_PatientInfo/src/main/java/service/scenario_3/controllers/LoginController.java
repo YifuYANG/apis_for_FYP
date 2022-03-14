@@ -28,11 +28,16 @@ public class LoginController {
     public ResponseEntity<Map> login(@RequestBody Loginform loginform){
         Map<String,String> map = new HashMap<>();
         User user = userRepository.findByUserBytrustdvice(loginform.getDeviceid());
-        if(loginform.getPassword().equals(user.getPassword())){
-            String token=tokenPool.generateToken();
-            tokenPool.login(loginform.getDeviceid(),token);
-            map.put("token",token);
-            return new ResponseEntity<>(map, HttpStatus.CREATED);
+        if(user!=null){
+            if(loginform.getPassword().equals(user.getPassword())){
+                String token=tokenPool.generateToken();
+                tokenPool.login(loginform.getDeviceid(),token);
+                map.put("token",token);
+                return new ResponseEntity<>(map, HttpStatus.CREATED);
+            } else {
+                map.put("token",null);
+                return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+            }
         } else {
             map.put("token",null);
             return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
