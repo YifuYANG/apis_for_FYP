@@ -32,10 +32,11 @@ public class UploadController {
     @RestrictUserAccess(requiredLevel = UserLevel.admin)
     @RequestMapping(value="/uploaddata",method= RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> uploadData(@RequestHeader("token") String token,@RequestBody UploadedData uploadedData){
-        uploadedData.setDistance(distanceCalculation(uploadedData.getCurrentLatitude(),uploadedData.getCurrentLongitude(),uploadedData.getTargetLatitude(),uploadedData.getTargetLongitude()));
+    public ResponseEntity<Double> uploadData(@RequestHeader("token") String token, @RequestBody UploadedData uploadedData){
+        double distance = distanceCalculation(uploadedData.getCurrentLatitude(),uploadedData.getCurrentLongitude(),uploadedData.getTargetLatitude(),uploadedData.getTargetLongitude());
+        uploadedData.setDistance(distance);
         uploadedDataRepository.save(uploadedData);
-        return new ResponseEntity<>(true, HttpStatus.CREATED);
+        return new ResponseEntity<>(distance, HttpStatus.CREATED);
     }
 
 
