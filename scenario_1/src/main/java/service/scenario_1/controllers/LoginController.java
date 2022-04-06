@@ -26,6 +26,7 @@ public class LoginController {
     @ResponseBody
     public ResponseEntity<Map> login(@RequestBody Loginform loginform){
         Map<String,String> map = new HashMap<>();
+        System.out.println(loginform.getDeviceid()+"====="+loginform.getPassword());
         User user = userRepository.findByUserBytrustdvice(loginform.getDeviceid());
         if(loginform.getPassword().equals(user.getPassword())){
             String token=tokenPool.generateToken();
